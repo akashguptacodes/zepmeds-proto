@@ -20,9 +20,8 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0b0028] to-[#19004d] text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2d9eef] to-[#19004d] text-white">
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0b0028] to-[#19004d]"></div>
 
         {/* Animated Background Elements */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
@@ -52,15 +51,6 @@ const Home: React.FC = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="large"
-                  className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold text-lg px-8 py-4 shadow-2xl transform hover:scale-105 transition-all duration-200"
-                >
-                  <Link to="/medicines?category=emergency" className="flex items-center space-x-2">
-                    <Zap className="h-5 w-5" />
-                    <span>Order Emergency Medicine</span>
-                  </Link>
-                </Button>
                 <Button
                   variant="outline"
                   size="large"
@@ -311,7 +301,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Health Tests CTA */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 text-white relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-[#2d9eef] to-[#19004d] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-10 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-80 h-80 bg-pink-400/10 rounded-full blur-3xl"></div>
