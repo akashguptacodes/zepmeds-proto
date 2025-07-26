@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tilt } from 'react-tilt';
 import { Clock, Shield, Star, ArrowRight, Zap, CheckCircle, Award, Users } from 'lucide-react';
@@ -8,6 +8,10 @@ import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Lottie from 'lottie-react';
 import deliveryAnimation from '../assets/lottie/DeliveryScooter.json';
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../services/variants';
 
 const Home: React.FC = () => {
   const featuredMedicines = medicines.slice(0, 4);
@@ -16,6 +20,18 @@ const Home: React.FC = () => {
   const handleAddToCart = (medicine: any) => {
     dispatch({ type: 'ADD_ITEM', payload: { item: medicine, type: 'medicine' } });
   };
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
+
+  const [start, setStart] = useState(false);
+
+  useEffect(() => {
+    if (inView) {
+      setStart(true);
+    }
+  }, [inView]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -29,7 +45,15 @@ const Home: React.FC = () => {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+            <motion.div
+              className="space-y-8"
+              variants={fadeIn('up', 0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{
+                once: true,
+                amount: 0
+              }}>
               <div className="flex items-center space-x-3 text-yellow-300">
                 <div className="bg-yellow-400/20 p-2 rounded-full">
                   <Zap className="h-6 w-6" />
@@ -75,9 +99,15 @@ const Home: React.FC = () => {
                   <span className="text-blue-100">24/7 Available</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="relative">
+            <motion.div className="relative" variants={fadeIn('up', 0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{
+                once: true,
+                amount: 0
+              }}>
               <div className="rounded-3xl overflow-hidden w-full max-w-[20rem] sm:max-w-[28rem] lg:max-w-[36rem] mx-auto">
                 <Lottie
                   animationData={deliveryAnimation}
@@ -95,7 +125,7 @@ const Home: React.FC = () => {
                   <div className="text-sm">DELIVERY</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -127,30 +157,66 @@ const Home: React.FC = () => {
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-8" variants={fadeIn('up', 0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{
+              once: true,
+              amount: 0
+            }}>
             <div className="text-center">
-              <div className="text-4xl font-black text-blue-600 mb-2">15</div>
+              <div ref={ref}>
+                {start && (
+                  <CountUp
+                    className="text-4xl font-black text-blue-600 mb-2"
+                    end={15}
+                  />
+                )}
+              </div>
               <div className="text-gray-600 font-medium">Minutes Delivery</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-black text-green-600 mb-2">50K+</div>
+              <div ref={ref}>
+                {start && (
+                  <CountUp
+                    className="text-4xl font-black text-blue-600 mb-2"
+                    end={50000}
+                    suffix='+'
+                  />
+                )}
+              </div>
               <div className="text-gray-600 font-medium">Happy Customers</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-black text-purple-600 mb-2">10K+</div>
+              <div ref={ref}>
+                {start && (
+                  <CountUp
+                    className="text-4xl font-black text-blue-600 mb-2"
+                    end={10000}
+                    suffix='+'
+                  />
+                )}
+
+              </div>
               <div className="text-gray-600 font-medium">Medicines Available</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-black text-orange-600 mb-2">24/7</div>
               <div className="text-gray-600 font-medium">Service Available</div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Features */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" variants={fadeIn('up', 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{
+            once: true,
+            amount: 0
+          }}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 font-display text-shadow">
               Why Choose <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">ZapMeds</span>?
@@ -191,12 +257,18 @@ const Home: React.FC = () => {
               </Card>
             </Tilt>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Categories */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" variants={fadeIn('up', 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{
+            once: true,
+            amount: 0
+          }}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 font-display text-shadow">Shop by Category</h2>
             <p className="text-xl text-gray-600 font-sans">Find exactly what you need from our comprehensive medicine collection</p>
@@ -224,12 +296,18 @@ const Home: React.FC = () => {
               </Tilt>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Featured Products */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" variants={fadeIn('up', 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{
+            once: true,
+            amount: 0
+          }}>
           <div className="flex justify-between items-center mb-12">
             <div>
               <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 font-display text-shadow">Popular Medicines</h2>
@@ -297,7 +375,7 @@ const Home: React.FC = () => {
               </Tilt>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Health Tests CTA */}
@@ -306,7 +384,13 @@ const Home: React.FC = () => {
         <div className="absolute top-10 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-80 h-80 bg-pink-400/10 rounded-full blur-3xl"></div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" variants={fadeIn('up', 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{
+            once: true,
+            amount: 0
+          }}>
           <h2 className="text-4xl md:text-5xl font-black mb-6 font-display text-shadow-lg">Health Tests at Your Doorstep</h2>
           <p className="text-purple-100 text-xl mb-10 max-w-3xl mx-auto leading-relaxed font-sans">
             Book lab tests online and get sample collection at your home. Fast, safe, and reliable health checkups with reports in hours.
@@ -320,12 +404,18 @@ const Home: React.FC = () => {
               <ArrowRight className="h-5 w-5" />
             </Link>
           </Button>
-        </div>
+        </motion.div>
       </section>
 
       {/* Testimonials */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" variants={fadeIn('up', 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{
+            once: true,
+            amount: 0
+          }}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 font-display text-shadow">What Our Customers Say</h2>
             <p className="text-xl text-gray-600 font-sans">Join thousands of satisfied customers who trust ZapMeds</p>
@@ -368,10 +458,9 @@ const Home: React.FC = () => {
               </Tilt>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
 };
-
 export default Home;

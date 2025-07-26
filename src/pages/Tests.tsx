@@ -153,7 +153,7 @@ const Tests: React.FC = () => {
           <p className="text-blue-100 mb-6">
             Consult with our healthcare experts to get personalized test recommendations.
           </p>
-          <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+          <Button variant="outline" className="border-white text-blue-500 hover:bg-white hover:text-blue-600">
             Talk to Expert
           </Button>
         </div>
