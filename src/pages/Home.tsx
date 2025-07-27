@@ -84,20 +84,14 @@ const Home: React.FC = () => {
                 </Button>
               </div>
 
-              {/* Trust Indicators */}
               <div className="flex items-center space-x-8 pt-8">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="h-6 w-6 text-green-400" />
-                  <div ref={ref}>
-                    {start && (
                       <CountUp
                         className="text-blue-100"
                         end={100}
-                        suffix='%'
+                        suffix='% Genuine'
                       />
-                    )}
-                  </div>
-                  <span className="text-blue-100">Genuine</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Shield className="h-6 w-6 text-green-400" />
