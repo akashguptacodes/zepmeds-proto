@@ -43,7 +43,6 @@ export const categories: Category[] = [
   { id: '1', name: 'Common Medicines', icon: '💊', color: 'bg-blue-100 text-blue-800' },
   { id: '2', name: 'Emergency Medicines', icon: '🚨', color: 'bg-red-100 text-red-800' },
   { id: '3', name: 'Seasonal Medicines', icon: '🌿', color: 'bg-green-100 text-green-800' },
-  { id: '4', name: 'Lab Tests', icon: '🧪', color: 'bg-purple-100 text-purple-800' },
   { id: '5', name: 'Cold & Cough', icon: '🤧', color: 'bg-cyan-100 text-cyan-800' },
   { id: '6', name: 'Fever & Pain', icon: '🤒', color: 'bg-orange-100 text-orange-800' },
 ];

@@ -33,12 +33,12 @@ const ProductDetail: React.FC = () => {
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
-      dispatch({ 
-        type: 'ADD_ITEM', 
-        payload: { 
-          item: product, 
+      dispatch({
+        type: 'ADD_ITEM',
+        payload: {
+          item: product,
           type: productType as 'medicine' | 'test'
-        } 
+        }
       });
     }
   };
@@ -71,11 +71,11 @@ const ProductDetail: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         <div>
           <h3 className="font-semibold text-lg mb-4">Dosage & Usage</h3>
           <p className="text-gray-600 text-sm mb-4">{med.dosage}</p>
-          
+
           <h4 className="font-medium mb-2">Side Effects:</h4>
           <ul className="text-sm text-gray-600 space-y-1">
             {med.sideEffects.map((effect: string, index: number) => (
@@ -114,11 +114,11 @@ const ProductDetail: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       <div>
         <h3 className="font-semibold text-lg mb-4">Test Description</h3>
         <p className="text-gray-600 text-sm">{test.description}</p>
-        
+
         {test.preparationRequired && (
           <div className="mt-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
             <p className="text-orange-800 text-sm font-medium">
@@ -157,8 +157,8 @@ const ProductDetail: React.FC = () => {
           {/* Product Image */}
           <div>
             <Card className="overflow-hidden">
-              <img 
-                src={product.image} 
+              <img
+                src={product.image}
                 alt={product.name}
                 className="w-full h-96 object-cover"
               />
@@ -170,14 +170,14 @@ const ProductDetail: React.FC = () => {
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
               {medicine && <p className="text-gray-600">by {medicine.manufacturer}</p>}
-              
+
               <div className="flex items-center space-x-4 mt-4">
                 <div className="flex items-center space-x-1">
                   <Star className="h-5 w-5 text-yellow-400 fill-current" />
                   <span className="font-medium">{product.rating}</span>
                   <span className="text-gray-500">({product.reviews} reviews)</span>
                 </div>
-                
+
                 {medicine && medicine.deliveryTime && (
                   <div className="flex items-center space-x-1 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
                     <Clock className="h-4 w-4" />
@@ -213,7 +213,7 @@ const ProductDetail: React.FC = () => {
             </div>
 
             {/* Quantity Selector (for medicines only) */}
-            {medicine && (
+            {/* {medicine && (
               <div className="flex items-center space-x-4">
                 <span className="text-gray-700 font-medium">Quantity:</span>
                 <div className="flex items-center border border-gray-300 rounded-lg">
@@ -233,22 +233,7 @@ const ProductDetail: React.FC = () => {
                   </button>
                 </div>
               </div>
-            )}
-
-            {/* Action Buttons */}
-            <div className="flex space-x-4">
-              <Button
-                size="large"
-                onClick={handleAddToCart}
-                className="flex-1"
-                disabled={medicine && !medicine.inStock}
-              >
-                {productType === 'medicine' ? 'Add to Cart' : 'Book Test'}
-              </Button>
-              <button className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50">
-                <Heart className="h-6 w-6 text-gray-600" />
-              </button>
-            </div>
+            )} */}
 
             {/* Prescription Warning */}
             {medicine && medicine.prescriptionRequired && (
@@ -267,31 +252,28 @@ const ProductDetail: React.FC = () => {
             <div className="flex space-x-8">
               <button
                 onClick={() => setActiveTab('description')}
-                className={`py-2 border-b-2 font-medium text-sm ${
-                  activeTab === 'description'
+                className={`py-2 border-b-2 font-medium text-sm ${activeTab === 'description'
                     ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
-                }`}
+                  }`}
               >
                 Description
               </button>
               <button
                 onClick={() => setActiveTab('details')}
-                className={`py-2 border-b-2 font-medium text-sm ${
-                  activeTab === 'details'
+                className={`py-2 border-b-2 font-medium text-sm ${activeTab === 'details'
                     ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
-                }`}
+                  }`}
               >
                 Details
               </button>
               <button
                 onClick={() => setActiveTab('reviews')}
-                className={`py-2 border-b-2 font-medium text-sm ${
-                  activeTab === 'reviews'
+                className={`py-2 border-b-2 font-medium text-sm ${activeTab === 'reviews'
                     ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
-                }`}
+                  }`}
               >
                 Reviews ({product.reviews})
               </button>

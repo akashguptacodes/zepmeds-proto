@@ -12,6 +12,7 @@ import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../services/variants';
+import GetApp from '../components/GetApp';
 
 const Home: React.FC = () => {
   const featuredMedicines = medicines.slice(0, 4);
@@ -277,17 +278,13 @@ const Home: React.FC = () => {
             <p className="text-xl text-gray-600 font-sans">Find exactly what you need from our comprehensive medicine collection</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {categories.map((category) => (
               <Tilt
                 key={category.id}
                 options={{ max: 25, scale: 1.1, speed: 400 }}
               >
-                <Link
-                  to={`/medicines?category=${category.name.toLowerCase()}`}
-                  className="group block"
-                >
-                  <Card className="p-6 text-center group-hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50 border-0 h-full">
+                  <Card className=" p-6 text-center group-hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-gray-50 border-0 h-full">
                     <div className={`${category.color} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl group-hover:scale-110 transition-transform duration-300 shadow-xl`}>
                       {category.icon}
                     </div>
@@ -295,7 +292,6 @@ const Home: React.FC = () => {
                       {category.name}
                     </h3>
                   </Card>
-                </Link>
               </Tilt>
             ))}
           </div>
@@ -337,10 +333,6 @@ const Home: React.FC = () => {
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </Link>
-                    <div className="absolute top-3 left-3 bg-gradient-to-r from-green-400 to-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg">
-                      <Clock className="h-3 w-3" />
-                      <span>{medicine.deliveryTime}</span>
-                    </div>
                     <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
                       <div className="flex items-center space-x-1">
                         <Star className="h-4 w-4 text-yellow-400 fill-current" />
@@ -366,47 +358,11 @@ const Home: React.FC = () => {
                         </div>
                       </div>
                     </div>
-
-                    <Button
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 font-bold"
-                      onClick={() => handleAddToCart(medicine)}
-                    >
-                      Add to Cart
-                    </Button>
                   </div>
                 </Card>
               </Tilt>
             ))}
           </div>
-        </motion.div>
-      </section>
-
-      {/* Health Tests CTA */}
-      <section className="py-20 bg-gradient-to-br from-[#2d9eef] to-[#19004d] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute top-10 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-pink-400/10 rounded-full blur-3xl"></div>
-
-        <motion.div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" variants={fadeIn('up', 0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{
-            once: true,
-            amount: 0
-          }}>
-          <h2 className="text-4xl md:text-5xl font-black mb-6 font-display text-shadow-lg">Health Tests at Your Doorstep</h2>
-          <p className="text-purple-100 text-xl mb-10 max-w-3xl mx-auto leading-relaxed font-sans">
-            Book lab tests online and get sample collection at your home. Fast, safe, and reliable health checkups with reports in hours.
-          </p>
-          <Button
-            size="large"
-            className="bg-white text-purple-600 hover:bg-gray-100 font-bold text-lg px-8 py-4 shadow-2xl transform hover:scale-105 transition-all duration-200"
-          >
-            <Link to="/tests" className="flex items-center space-x-2">
-              <span>Book Health Test</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </Button>
         </motion.div>
       </section>
 
@@ -462,6 +418,9 @@ const Home: React.FC = () => {
             ))}
           </div>
         </motion.div>
+      </section>
+      <section className="py-20 bg-white">
+        <GetApp/>
       </section>
     </div>
   );

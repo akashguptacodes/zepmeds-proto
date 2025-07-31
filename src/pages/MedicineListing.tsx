@@ -228,10 +228,6 @@ const MedicineListing: React.FC = () => {
                     
                     <div className="p-6 flex-1">
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs bg-gradient-to-r from-green-400 to-green-500 text-white px-3 py-1 rounded-full flex items-center space-x-1 font-bold shadow-lg">
-                          <Clock className="h-3 w-3" />
-                          <span>{medicine.deliveryTime}</span>
-                        </span>
                         <div className="flex items-center space-x-1 bg-yellow-50 px-2 py-1 rounded-full">
                           <Star className="h-4 w-4 text-yellow-400 fill-current" />
                           <span className="text-sm font-bold text-gray-700">{medicine.rating}</span>
@@ -260,14 +256,6 @@ const MedicineListing: React.FC = () => {
                             {Math.round(((medicine.originalPrice - medicine.price) / medicine.originalPrice) * 100)}% OFF
                           </div>
                         </div>
-                        <Button 
-                          size="small"
-                          onClick={() => handleAddToCart(medicine)}
-                          disabled={!medicine.inStock}
-                          className="shadow-lg"
-                        >
-                          {medicine.inStock ? 'Add to Cart' : 'Out of Stock'}
-                        </Button>
                       </div>
                     </div>
                   </Card>
