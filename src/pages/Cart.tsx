@@ -22,12 +22,12 @@ const Cart: React.FC = () => {
 
   if (state.items.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <ShoppingCart className="h-24 w-24 text-gray-300 mx-auto mb-6" />
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Your Cart is Empty</h2>
-            <p className="text-gray-600 mb-8">Add medicines and health tests to get started</p>
+            <ShoppingCart className="h-24 w-24 text-gray-300 dark:text-gray-600 mx-auto mb-6" />
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Your Cart is Empty</h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-8">Add medicines and health tests to get started</p>
             <div className="space-x-4">
               <Link to="/medicines">
                 <Button size="large">Browse Medicines</Button>
@@ -43,11 +43,11 @@ const Cart: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-black text-gray-900">Shopping Cart</h1>
-          <Button variant="ghost" onClick={clearCart} className="text-red-600 hover:text-red-700 hover:bg-red-50">
+          <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white">Shopping Cart</h1>
+          <Button variant="ghost" onClick={clearCart} className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20">
             <Trash2 className="h-4 w-4 mr-2" />
             Clear Cart
           </Button>
@@ -57,7 +57,7 @@ const Cart: React.FC = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {state.items.map((cartItem) => (
-              <Card key={cartItem.id} className="p-6 bg-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
+              <Card key={cartItem.id} className="p-6 bg-white dark:bg-gray-800 border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <img
                     src={cartItem.item.image}
@@ -68,22 +68,22 @@ const Cart: React.FC = () => {
                   <div className="flex-1 space-y-2">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="font-bold text-xl text-gray-900">
+                        <h3 className="font-bold text-xl text-gray-900 dark:text-white">
                           {cartItem.item.name}
                         </h3>
                         {cartItem.type === 'medicine' && (
                           <>
-                            <p className="text-gray-600 text-sm font-medium">
+                            <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
                               by {(cartItem.item as any).manufacturer}
                             </p>
-                            <div className="flex items-center space-x-1 text-sm text-green-600 font-bold">
+                            <div className="flex items-center space-x-1 text-sm text-green-600 dark:text-green-400 font-bold">
                               <Clock className="h-4 w-4" />
                               <span>{(cartItem.item as any).deliveryTime}</span>
                             </div>
                           </>
                         )}
                         {cartItem.type === 'test' && (
-                          <p className="text-gray-600 text-sm font-medium">
+                          <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
                             {(cartItem.item as any).category} • Report in {(cartItem.item as any).reportTime}
                           </p>
                         )}
@@ -98,28 +98,28 @@ const Cart: React.FC = () => {
 
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-2">
-                        <span className="text-2xl font-black text-gray-900">
+                        <span className="text-2xl font-black text-gray-900 dark:text-white">
                           ₹{cartItem.item.price}
                         </span>
-                        <span className="text-sm text-gray-500 line-through">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
                           ₹{cartItem.item.originalPrice}
                         </span>
                       </div>
 
-                      <div className="flex items-center border-2 border-gray-200 rounded-xl shadow-lg bg-white">
+                      <div className="flex items-center border-2 border-gray-200 dark:border-gray-600 rounded-xl shadow-lg bg-white dark:bg-gray-700">
                         <button
                           onClick={() => updateQuantity(cartItem.id, cartItem.quantity - 1)}
-                          className="p-3 hover:bg-gray-100 disabled:opacity-50 rounded-l-xl transition-colors duration-200"
+                          className="p-3 hover:bg-gray-100 dark:hover:bg-gray-600 disabled:opacity-50 rounded-l-xl transition-colors duration-200"
                           disabled={cartItem.quantity <= 1}
                         >
                           <Minus className="h-4 w-4" />
                         </button>
-                        <span className="px-6 py-3 border-x-2 border-gray-200 font-bold text-lg">
+                        <span className="px-6 py-3 border-x-2 border-gray-200 dark:border-gray-600 font-bold text-lg text-gray-900 dark:text-white">
                           {cartItem.quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(cartItem.id, cartItem.quantity + 1)}
-                          className="p-3 hover:bg-gray-100 rounded-r-xl transition-colors duration-200"
+                          className="p-3 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-r-xl transition-colors duration-200"
                         >
                           <Plus className="h-4 w-4" />
                         </button>
@@ -133,20 +133,20 @@ const Cart: React.FC = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <Card className="p-8 sticky top-24 bg-gradient-to-br from-white to-gray-50 border-0 shadow-2xl">
-              <h3 className="text-2xl font-black mb-6 text-gray-900">Order Summary</h3>
+            <Card className="p-8 sticky top-24 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 border-0 shadow-2xl">
+              <h3 className="text-2xl font-black mb-6 text-gray-900 dark:text-white">Order Summary</h3>
               
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-lg font-medium">
+                <div className="flex justify-between text-lg font-medium text-gray-900 dark:text-white">
                   <span>Items ({state.itemCount})</span>
                   <span>₹{state.total}</span>
                 </div>
-                <div className="flex justify-between text-lg font-medium">
+                <div className="flex justify-between text-lg font-medium text-gray-900 dark:text-white">
                   <span>Delivery Fee</span>
-                  <span className="text-green-600 font-bold">FREE</span>
+                  <span className="text-green-600 dark:text-green-400 font-bold">FREE</span>
                 </div>
-                <div className="border-t-2 border-gray-200 pt-4">
-                  <div className="flex justify-between font-black text-2xl">
+                <div className="border-t-2 border-gray-200 dark:border-gray-600 pt-4">
+                  <div className="flex justify-between font-black text-2xl text-gray-900 dark:text-white">
                     <span>Total</span>
                     <span>₹{state.total}</span>
                   </div>
